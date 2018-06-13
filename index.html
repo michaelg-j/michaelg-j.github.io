@@ -26,11 +26,11 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-myfunction.get.call(function (err, xname) {
+myfunction.today.call(function (err, xname) {
 if (err) { console.log(err) }
 if (xname) {
 //display value on the webpage
-document.getElementById("xbalance").innerHTML = "last inserted value into the blockchain is : " + xname;
+document.getElementById("xbalance").innerHTML = "today is : " + xname;
 }
 });
 }
@@ -60,7 +60,7 @@ document.getElementById("xvalue").innerHTML = err;
 </script>
 <center>
 <div id="metamask"></div>
-<h3>Insert and retrieve value on the blockchain</h3>
+<h3>guess tomorrow's btc price</h3>
 <br />
 <table>
 <tr>
