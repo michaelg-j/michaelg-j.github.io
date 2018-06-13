@@ -6,17 +6,6 @@
 </head>
 <body>
 <script>
-window.onload = function () {
-// check to see if user has metamask addon installed on his browser. check to make sure web3 is defined
-if (typeof web3 === 'undefined') {
-document.getElementById('metamask').innerHTML = 'You need <a href="https://metamask.io/">MetaMask</a> browser plugin to run this example'
-}
-// call the getvalue function here
-getvalue();
-}
-//function to retrieve the last inserted value on the blockchain
-function getvalue() {
-try {
 // contract Abi defines all the variables,constants and functions of the smart contract. replace with your own abi
 var abi = [
 
@@ -51,6 +40,18 @@ var abi = [
 ]
 //contract address. please change the address to your own
 var contractaddress = '0x434febfbc388e988abd8a88d248968b499c4930d';
+window.onload = function () {
+// check to see if user has metamask addon installed on his browser. check to make sure web3 is defined
+if (typeof web3 === 'undefined') {
+document.getElementById('metamask').innerHTML = 'You need <a href="https://metamask.io/">MetaMask</a> browser plugin to run this example'
+}
+// call the getvalue function here
+getvalue();
+}
+//function to retrieve the last inserted value on the blockchain
+function getvalue() {
+try {
+
 //instantiate and connect to contract address via Abi
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
@@ -70,39 +71,7 @@ document.getElementById("xbalance").innerHTML = err;
 // function to add a new integer value to the blockchain
 function setvalue() {
 try {
-// contract Abi defines all the variables,constants and functions of the smart contract. replace with your own abi
-var abi =[
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "x",
-				"type": "uint256"
-			}
-		],
-		"name": "set",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "get",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-]
-//contract address. please change the address to your own
-var contractaddress = '0x434febfbc388e988abd8a88d248968b499c4930d';
+
 //instantiate and connect to contract address via Abi
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
