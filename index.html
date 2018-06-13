@@ -6,6 +6,7 @@
 </head>
 <body>
 <script>
+var today;
 // contract Abi defines all the variables,constants and functions of the smart contract. replace with your own abi
 var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"samePricePeoples","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"},{"name":"proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"result","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bitcoinPrices","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"},{"name":"day","type":"uint256"}],"name":"guessWithEth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"dailyTotal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"update","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"}],"name":"guess","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"today","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToQuery","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userSends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"dayFor","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userGuesses","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"LogUserSends","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogOraclizeQuery","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"result","type":"uint256"}],"name":"LogUpdatPrice","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"successCount","type":"uint256"},{"indexed":false,"name":"sender","type":"address"}],"name":"LogResult","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"}],"name":"LogDayFor","type":"event"}]
 //contract address. please change the address to your own
@@ -31,6 +32,7 @@ if (err) { console.log(err) }
 if (xname) {
 //display value on the webpage
 document.getElementById("xbalance").innerHTML = "today is : " + xname;
+ 
 }
 });
 }
@@ -46,7 +48,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the set function of our SimpleStorage contract
-myfunction.set.sendTransaction(document.getElementById("xvalue").value, { from: web3.eth.accounts[0], gas: 4000000 }, function (error, result) {
+myfunction.guess.sendTransaction(document.getElementById("xvalue").value, { from: web3.eth.accounts[0], gas: 90000 }, function (error, result) {
 if (!error) {
 console.log(result);
 } else {
@@ -57,6 +59,49 @@ console.log(error);
 document.getElementById("xvalue").innerHTML = err;
 }
 }
+  
+function getYesterdayInfo() {
+try {
+
+//instantiate and connect to contract address via Abi
+var myAbi = web3.eth.contract(abi);
+var myfunction = myAbi.at(contractaddress);
+//call the get function of our SimpleStorage contract
+var today =   myfunction.today.call();
+myfunction.bitcoinPrices.call(today -1,function (err, price) {
+if (err) { console.log(err) }
+if (price) {
+//display value on the webpage
+document.getElementById("yesterday_btc_price").innerHTML = "yesterday price is : " + price;
+}
+});
+var guessedPriceYesterday =  myfunction.userGuesses.call(today -1,web3.eth.accounts[0]);
+document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + guessedPriceYesterday;
+}
+catch (err) {
+document.getElementById("xbalance").innerHTML = err;
+}
+}
+  
+function result() {
+try {
+
+//instantiate and connect to contract address via Abi
+var myAbi = web3.eth.contract(abi);
+var myfunction = myAbi.at(contractaddress);
+//call the set function of our SimpleStorage contract
+myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 200000 }, function (error, result) {
+if (!error) {
+console.log(result);
+} else {
+console.log(error);
+}
+})
+} catch (err) {
+document.getElementById("xvalue").innerHTML = err;
+}
+}
+  
 </script>
 <center>
 <div id="metamask"></div>
@@ -70,11 +115,29 @@ document.getElementById("xvalue").innerHTML = err;
 </td>
 </tr>
 <tr>
-<td>Insert a new value :</td>
+<td>Input the price you think the btc will be tomorrow at 20:00:00:</td>
 <td>
 <input id="xvalue" type="text" />
-<input id="Button1" type="button" onclick="setvalue()" value="Add to Blockchain" />
+<input id="Button1" type="button" onclick="setvalue()" value="Guess with 0.003 eth" />
 </td>
+<br />
+<tr>
+<td>
+  <div id ="yesterday_btc_price"></div>
+</td>
+</tr>
+  <tr>
+<td>
+  <div id ="yesterday_user_guessed_price"></div>
+</td>
+</tr>
+   <tr>
+<td>
+  <input id="rewarddayvalue" type="text" />
+<input id="Button2" type="button" onclick="result()" value="get rewardk" />
+</td>
+</tr>
+  
 </tr>
 </table>
 </center>
