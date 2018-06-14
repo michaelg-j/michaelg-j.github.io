@@ -19,7 +19,7 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 // call the getvalue function here
 getvalue();
 getYesterdayPrice();
-getYesterdayUserGuessPrice();
+getUserGuessedPriceForDay();
 }
 //function to retrieve the last inserted value on the blockchain
 function getvalue() {
@@ -69,7 +69,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-myfunction.bitcoinPrices.call(3,function (err, price) {
+myfunction.bitcoinPrices.call(today-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_btc_price").innerHTML = err;
@@ -85,21 +85,21 @@ document.getElementById("yesterday_btc_price").innerHTML = err;
 }
 }
  
-function getYesterdayUserGuessPrice(){
+function getUserGuessedPriceForDay(){
 try {
 
 //instantiate and connect to contract address via Abi
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-myfunction.userGuesses.call(3,"0x994560Fc97DF48d88F40b3A242D652cB2999d763",function (err, price) {
+myfunction.userGuesses.call( today-1,web3.eth.accounts[0],function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
 }
 if (price) {
 //display value on the webpage
-document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday price is : " + price;
+document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday you guessed price is : " + price;
 }
 });
 }
@@ -115,7 +115,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the set function of our SimpleStorage contract
-myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 200000 }, function (error, result) {
+myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 800000 }, function (error, result) {
 if (!error) {
 console.log(result);
 } else {
@@ -123,7 +123,7 @@ console.log(error);
 }
 })
 } catch (err) {
-document.getElementById("xvalue").innerHTML = err;
+document.getElementById("xbalance").innerHTML = err;
 }
 }
   
