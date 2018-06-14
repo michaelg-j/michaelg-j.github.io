@@ -33,7 +33,7 @@ if (err) { console.log(err) }
 if (xname) {
 //display value on the webpage
 document.getElementById("xbalance").innerHTML = "today is : " + xname;
- 
+ today = xname;
 }
 });
 }
@@ -68,19 +68,32 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-var today =   myfunction.today.call();
 myfunction.bitcoinPrices.call(today -1,function (err, price) {
-if (err) { console.log(err) }
+if (err) { 
+ console.log(err);
+ document.getElementById("yesterday_btc_price").innerHTML = err;
+}
 if (price) {
 //display value on the webpage
 document.getElementById("yesterday_btc_price").innerHTML = "yesterday price is : " + price;
 }
 });
-var guessedPriceYesterday =  myfunction.userGuesses.call(today -1,web3.eth.accounts[0]);
-document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + guessedPriceYesterday;
+ 
+myfunction.userGuesses.call(today -1, function (error, result) {
+ 
+if (!error) {
+console.log(result);
+ document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + result;
+} else {
+console.log(error);
+  document.getElementById("yesterday_user_guessed_price").innerHTML =  + error;
+}
+ 
+});
+
 }
 catch (err) {
-document.getElementById("xbalance").innerHTML = err;
+document.getElementById("yesterday_btc_price").innerHTML = err;
 }
 }
   
