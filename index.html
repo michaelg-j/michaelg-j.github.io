@@ -79,14 +79,14 @@ document.getElementById("yesterday_btc_price").innerHTML = "yesterday price is :
 }
 });
  
-myfunction.userGuesses.call(today -1, function (error, result) {
+myfunction.userGuesses.call(today -1, web3.eth.accounts[0],function (error, result) {
  
 if (!error) {
 console.log(result);
  document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + result;
 } else {
 console.log(error);
-  document.getElementById("yesterday_user_guessed_price").innerHTML =  + error;
+  document.getElementById("yesterday_user_guessed_price").innerHTML =  error;
 }
  
 });
@@ -148,7 +148,7 @@ document.getElementById("xvalue").innerHTML = err;
    <tr>
 <td>
   <input id="rewarddayvalue" type="text" />
-<input id="Button2" type="button" onclick="result()" value="get rewardk" />
+<input id="Button2" type="button" onclick="result()" value="get reward" />
 </td>
 </tr>
   
