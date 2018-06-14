@@ -69,7 +69,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-myfunction.bitcoinPrices.call(today -1,function (err, price) {
+myfunction.bitcoinPrices.call(3,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_btc_price").innerHTML = err;
