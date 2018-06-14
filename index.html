@@ -18,7 +18,8 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 }
 // call the getvalue function here
 getvalue();
- getYesterdayInfo();
+ getYesterdayPrice();
+  getUserData();
 }
 //function to retrieve the last inserted value on the blockchain
 function getvalue() {
@@ -61,7 +62,7 @@ document.getElementById("xvalue").innerHTML = err;
 }
 }
   
-function getYesterdayInfo() {
+function getYesterdayPrice() {
 try {
 
 //instantiate and connect to contract address via Abi
@@ -78,24 +79,22 @@ if (price) {
 document.getElementById("yesterday_btc_price").innerHTML = "yesterday price is : " + price;
 }
 });
- 
-myfunction.userGuesses.call(today -1, web3.eth.accounts[0],function (error, result) {
- 
-if (!error) {
-console.log(result);
- document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + result;
-} else {
-console.log(error);
-  document.getElementById("yesterday_user_guessed_price").innerHTML =  error;
-}
- 
-});
-
 }
 catch (err) {
 document.getElementById("yesterday_btc_price").innerHTML = err;
 }
 }
+ 
+ function getYesterdayUserGuessPrice(){
+  var myAbi = web3.eth.contract(abi);
+  var myfunction = myAbi.at(contractaddress);
+  return myfunction.methods.userGuesses(today-1,web3.eth.accounts[0]).call();
+ }
+ function getUserData(){
+  getYesterdayUserGuessPrice().then(function(price){
+      document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday guessed price is : " + price;
+  });
+ }
   
 function result() {
 try {
