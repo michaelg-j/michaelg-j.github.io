@@ -35,6 +35,7 @@ if (xname) {
 //display value on the webpage
 document.getElementById("xbalance").innerHTML = "today is : " + xname;
  today = xname;
+ console.log(xname) 
 }
 });
 }
@@ -93,7 +94,31 @@ var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
 var account = web3.eth.accounts[0];
-myfunction.userGuesses.call( today-1,{from: account},function (err, price) {
+myfunction.userGuesses.call( today-1,function (err, price) {
+if (err) { 
+ console.log(err);
+ document.getElementById("yesterday_user_guessed_price").innerHTML = err;
+}
+if (price) {
+//display value on the webpage
+document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday you guessed price is : " + price;
+}
+});
+}
+catch (err) {
+document.getElementById("yesterday_user_guessed_price").innerHTML = err;
+}
+}
+ 
+ function getUserGuessedPriceForDay1(result){
+try {
+
+//instantiate and connect to contract address via Abi
+var myAbi = web3.eth.contract(abi);
+var myfunction = myAbi.at(contractaddress);
+//call the get function of our SimpleStorage contract
+var account = web3.eth.accounts[0];
+myfunction.userGuesses.call( today-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
