@@ -24,8 +24,8 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 }
 // call the getvalue function here
 
-getvalue();
-init();
+getvalue().then(init);
+
 }
 
 function init(){
