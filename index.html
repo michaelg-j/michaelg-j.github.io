@@ -112,8 +112,8 @@ document.getElementById("yesterday_user_guessed_price").innerHTML = err;
 function getUserGuessedPriceForToday(){
 try {
 //call the get function of our SimpleStorage contract
-console.log(today+0);
-myfunction.getUserGuessedPriceByDay.call(today+0,function (err, todayPrice) {
+console.log(parseInt(today));
+myfunction.getUserGuessedPriceByDay.call(parseInt(today),function (err, todayPrice) {
 if (err) { 
  console.log(err);
  document.getElementById("today_user_guessed_price").innerHTML = err;
