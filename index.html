@@ -138,7 +138,7 @@ try {
 myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 800000 }, function (error, result) {
 if (!error) {
 console.log(result);
- document.getElementById("result_info").innerHTML = "get rewards successs";
+ document.getElementById("result_info").innerHTML = "tx send successs";
 } else {
 console.log(error);
  document.getElementById("result_info").innerHTML ="get rewards fail "+ err;
