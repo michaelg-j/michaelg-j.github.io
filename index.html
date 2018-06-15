@@ -105,14 +105,15 @@ document.getElementById("yesterday_user_guessed_price").innerHTML = err;
 function getUserGuessedPriceForToday(){
 try {
 //call the get function of our SimpleStorage contract
-
-myfunction.getUserGuessedPriceByDay.call(today+1-1,function (err, todayPrice) {
+console.log(today+0);
+myfunction.getUserGuessedPriceByDay.call(today+0,function (err, todayPrice) {
 if (err) { 
  console.log(err);
  document.getElementById("today_user_guessed_price").innerHTML = err;
 }
-if (price) {
+if (todayPrice) {
 //display value on the webpage
+ console.log(todayPrice);
 document.getElementById("today_user_guessed_price").innerHTML = "today you guessed price is : " + todayPrice;
 }
 });
