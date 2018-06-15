@@ -95,7 +95,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-
+console.log("getUserGuessedPriceForDay" +(today-1)+"_"+ web3.eth.accounts[0]);
 myfunction.getUserGuessedPriceByDay.call( today-1,web3.eth.accounts[0],function (err, price) {
 if (err) { 
  console.log(err);
