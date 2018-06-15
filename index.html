@@ -25,7 +25,7 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 // call the getvalue function here
 
 getvalue();
-
+init();
 }
 
 function init(){
@@ -72,7 +72,7 @@ document.getElementById("xvalue").innerHTML = err;
 function getYesterdayPrice() {
 try {
 //call the get function of our SimpleStorage contract
-myfunction.bitcoinPrices.call(today-1,function (err, price) {
+myfunction.bitcoinPrices.call(parseInt(today)-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_btc_price").innerHTML = err;
@@ -92,7 +92,7 @@ function getUserGuessedPriceForDay(){
 try {
 //call the get function of our SimpleStorage contract
 
-myfunction.getUserGuessedPriceByDay.call(today-8,function (err, price) {
+myfunction.getUserGuessedPriceByDay.call(parseInt(today)-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
@@ -193,7 +193,7 @@ document.getElementById("result_info").innerHTML = err;
 </tr>
 </tr>
 </table>
- <input id="Button3" type="button" onclick="init()" value="init" />
+ <input id="Button3" type="button" onclick="init()" value="refresh" />
 </center>
 </body>
 </html>
