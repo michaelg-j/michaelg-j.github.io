@@ -24,7 +24,7 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 }
 // call the getvalue function here
 
-getvalue().then(init);
+getvalue();
 
 }
 
@@ -44,7 +44,7 @@ if (xname) {
 //display value on the webpage
 document.getElementById("xbalance").innerHTML = "today is : " + xname;
  today = xname;
- 
+ init();
 }
 });
   
@@ -193,7 +193,7 @@ document.getElementById("result_info").innerHTML = err;
 </tr>
 </tr>
 </table>
- <input id="Button3" type="button" onclick="init()" value="refresh" />
+ <input id="Button3" type="button" onclick="getvalue()" value="refresh" />
 </center>
 </body>
 </html>
