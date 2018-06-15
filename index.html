@@ -50,7 +50,7 @@ document.getElementById("xbalance").innerHTML = err;
 function setvalue() {
 try {
 //call the set function of our SimpleStorage contract
-myfunction.guess.sendTransaction(document.getElementById("xvalue").value, { from: web3.eth.accounts[0], gas: 90000 , value: 3000000000000000}, function (error, result) {
+myfunction.guess.sendTransaction(document.getElementById("xvalue").value, { from: web3.eth.accounts[0], gas: 200000 , value: 3000000000000000}, function (error, result) {
 if (!error) {
 console.log(result);
 } else {
