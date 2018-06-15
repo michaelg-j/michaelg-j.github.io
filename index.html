@@ -17,8 +17,7 @@ if (typeof web3 === 'undefined') {
 document.getElementById('metamask').innerHTML = 'You need <a href="https://metamask.io/">MetaMask</a> browser plugin to run this example'
 }
 // call the getvalue function here
-var account = web3.eth.accounts[0];
-console.log(account.toString);
+
 getvalue();
 getYesterdayPrice();
 getUserGuessedPriceForDay();
@@ -96,8 +95,8 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-
-myfunction.userGuesses.call( today-1,"0x994560Fc97DF48d88F40b3A242D652cB2999d763",function (err, price) {
+//myfunction.methods.userGuesses( today-1,web3.eth.accounts[0]).call();
+myfunction.userGuesses.call( today-1,web3.eth.accounts[0],function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
