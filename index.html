@@ -154,7 +154,7 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the set function of our SimpleStorage contract
-myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 800000 }, function (error, result) {
+myfunction.result.sendTransaction(document.getElementById("rewarddayvalue").value, { from: web3.eth.accounts[0], gas: 800000, value: 300000000000000 }, function (error, result) {
 if (!error) {
 console.log(result);
 } else {
