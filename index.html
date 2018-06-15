@@ -8,9 +8,13 @@
 <script>
 var today;
 // contract Abi defines all the variables,constants and functions of the smart contract. replace with your own abi
-var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"samePricePeoples","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"},{"name":"proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"result","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bitcoinPrices","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"day","type":"uint256"},{"name":"user","type":"address"}],"name":"getUserGuessedPriceByDay","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"},{"name":"day","type":"uint256"}],"name":"guessWithEth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"dailyTotal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"update","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"}],"name":"guess","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"today","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToQuery","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userSends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"dayFor","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userGuesses","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"LogUserSends","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogOraclizeQuery","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"result","type":"uint256"}],"name":"LogUpdatPrice","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"successCount","type":"uint256"},{"indexed":false,"name":"sender","type":"address"}],"name":"LogResult","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"}],"name":"LogDayFor","type":"event"}]
+var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"samePricePeoples","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"},{"name":"proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"result","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bitcoinPrices","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"},{"name":"day","type":"uint256"}],"name":"guessWithEth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"dailyTotal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"update","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"day","type":"uint256"}],"name":"getUserGuessedPriceByDay","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"}],"name":"guess","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"today","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToQuery","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userSends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"dayFor","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userGuesses","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"LogUserSends","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogOraclizeQuery","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"result","type":"uint256"}],"name":"LogUpdatPrice","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"successCount","type":"uint256"},{"indexed":false,"name":"sender","type":"address"}],"name":"LogResult","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"}],"name":"LogDayFor","type":"event"}];
 //contract address. please change the address to your own
-var contractaddress = '0x90C1696C7632a3b760AcD1ba99174f991Ba38483';
+var contractaddress = '0x3AAaA8DD15d75d398E50f2321Cf8DFBb0d4e7f01';
+//instantiate and connect to contract address via Abi
+var myAbi = web3.eth.contract(abi);
+var myfunction = myAbi.at(contractaddress);
+//call the get function of our SimpleStorage contract
 window.onload = function () {
 // check to see if user has metamask addon installed on his browser. check to make sure web3 is defined
 if (typeof web3 === 'undefined') {
@@ -21,14 +25,11 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 getvalue();
 getYesterdayPrice();
 getUserGuessedPriceForDay();
+getUserGuessedPriceForToday();
 }
 //function to retrieve the last inserted value on the blockchain
 function getvalue() {
 try {
-
-//instantiate and connect to contract address via Abi
-var myAbi = web3.eth.contract(abi);
-var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
 myfunction.today.call(function (err, xname) {
 if (err) { console.log(err) }
@@ -36,7 +37,6 @@ if (xname) {
 //display value on the webpage
 document.getElementById("xbalance").innerHTML = "today is : " + xname;
  today = xname;
- console.log(xname) 
 }
 });
   
@@ -48,10 +48,6 @@ document.getElementById("xbalance").innerHTML = err;
 // function to add a new integer value to the blockchain
 function setvalue() {
 try {
-
-//instantiate and connect to contract address via Abi
-var myAbi = web3.eth.contract(abi);
-var myfunction = myAbi.at(contractaddress);
 //call the set function of our SimpleStorage contract
 myfunction.guess.sendTransaction(document.getElementById("xvalue").value, { from: web3.eth.accounts[0], gas: 90000 , value: 3000000000000000}, function (error, result) {
 if (!error) {
@@ -67,10 +63,6 @@ document.getElementById("xvalue").innerHTML = err;
   
 function getYesterdayPrice() {
 try {
-
-//instantiate and connect to contract address via Abi
-var myAbi = web3.eth.contract(abi);
-var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
 myfunction.bitcoinPrices.call(today-1,function (err, price) {
 if (err) { 
@@ -90,14 +82,9 @@ document.getElementById("yesterday_btc_price").innerHTML = err;
  
 function getUserGuessedPriceForDay(){
 try {
-
-//instantiate and connect to contract address via Abi
-var myAbi = web3.eth.contract(abi);
-var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
- var today1 = myfunction.today.call();
-console.log("getUserGuessedPriceForDay" +(today1-1));
-myfunction.getUserGuessedPriceByDay.call( today1-1,web3.eth.accounts[0],function (err, price) {
+
+myfunction.getUserGuessedPriceByDay.call(today-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
@@ -114,28 +101,22 @@ document.getElementById("yesterday_user_guessed_price").innerHTML = err;
 }
 }
  
- function getUserGuessedPriceForDay1(result){
+function getUserGuessedPriceForToday(){
 try {
-
-//instantiate and connect to contract address via Abi
-var myAbi = web3.eth.contract(abi);
-var myfunction = myAbi.at(contractaddress);
-//call the get function of our SimpleStorage contract
-var account = web3.eth.accounts[0];
- 
-myfunction.userGuesses.call( today-1,function (err, price) {
+myfunction.getUserGuessedPriceByDay.call(today,function (err, price) {
 if (err) { 
  console.log(err);
- document.getElementById("yesterday_user_guessed_price").innerHTML = err;
+ document.getElementById("today_user_guessed_price").innerHTML = err;
 }
 if (price) {
 //display value on the webpage
-document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday you guessed price is : " + price;
+document.getElementById("today_user_guessed_price").innerHTML = "today you guessed price is : " + price;
 }
 });
+
 }
 catch (err) {
-document.getElementById("yesterday_user_guessed_price").innerHTML = err;
+document.getElementById("today_user_guessed_price").innerHTML = err;
 }
 }
   
@@ -168,6 +149,9 @@ document.getElementById("xbalance").innerHTML = err;
 <td></td>
 <td>
 <div id="xbalance"></div>
+</td>
+ <td>
+<div id="today_user_guessed_price"></div>
 </td>
 </tr>
 <tr>
