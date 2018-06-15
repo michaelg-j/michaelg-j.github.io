@@ -8,9 +8,11 @@
 <script>
 var today;
 // contract Abi defines all the variables,constants and functions of the smart contract. replace with your own abi
-var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"samePricePeoples","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"},{"name":"proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"result","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bitcoinPrices","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"},{"name":"day","type":"uint256"}],"name":"guessWithEth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"dailyTotal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"update","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"day","type":"uint256"}],"name":"getUserGuessedPriceByDay","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"}],"name":"guess","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"today","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToQuery","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userSends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"dayFor","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userGuesses","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"LogUserSends","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogOraclizeQuery","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"result","type":"uint256"}],"name":"LogUpdatPrice","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"successCount","type":"uint256"},{"indexed":false,"name":"sender","type":"address"}],"name":"LogResult","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"}],"name":"LogDayFor","type":"event"}];
-//contract address. please change the address to your own
-var contractaddress = '0x3AAaA8DD15d75d398E50f2321Cf8DFBb0d4e7f01';
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"samePricePeoples","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"myid","type":"bytes32"},{"name":"result","type":"string"},{"name":"proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"result","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bitcoinPrices","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"},{"name":"day","type":"uint256"}],"name":"guessWithEth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"dailyTotal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"update","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"day","type":"uint256"}],"name":"getUserGuessedPriceByDay","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guessPrice","type":"uint256"}],"name":"guess","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"today","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToQuery","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userSends","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"timestamp","type":"uint256"}],"name":"dayFor","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"day","type":"uint256"}],"name":"timeToResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"userGuesses","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"LogUserSends","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogOraclizeQuery","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"result","type":"uint256"}],"name":"LogUpdatPrice","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"},{"indexed":false,"name":"successCount","type":"uint256"},{"indexed":false,"name":"sender","type":"address"}],"name":"LogResult","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"day","type":"uint256"}],"name":"LogDayFor","type":"event"}];
+// contract address. please change the address to your own
+ var contractaddress = '0x3AAaA8DD15d75d398E50f2321Cf8DFBb0d4e7f01';
+
+ 
 //instantiate and connect to contract address via Abi
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
@@ -23,10 +25,15 @@ document.getElementById('metamask').innerHTML = 'You need <a href="https://metam
 // call the getvalue function here
 
 getvalue();
-getYesterdayPrice();
-getUserGuessedPriceForDay();
-getUserGuessedPriceForToday();
+
 }
+
+function init(){
+ getYesterdayPrice();
+ getUserGuessedPriceForDay();
+ getUserGuessedPriceForToday();
+}
+ 
 //function to retrieve the last inserted value on the blockchain
 function getvalue() {
 try {
@@ -65,7 +72,7 @@ document.getElementById("xvalue").innerHTML = err;
 function getYesterdayPrice() {
 try {
 //call the get function of our SimpleStorage contract
-myfunction.bitcoinPrices.call(today-8,function (err, price) {
+myfunction.bitcoinPrices.call(today-1,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_btc_price").innerHTML = err;
@@ -85,7 +92,7 @@ function getUserGuessedPriceForDay(){
 try {
 //call the get function of our SimpleStorage contract
 
-myfunction.getUserGuessedPriceByDay.call(today-1,function (err, price) {
+myfunction.getUserGuessedPriceByDay.call(today-8,function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
@@ -186,6 +193,7 @@ document.getElementById("result_info").innerHTML = err;
 </tr>
 </tr>
 </table>
+ <input id="Button3" type="button" onclick="init()" value="init" />
 </center>
 </body>
 </html>
