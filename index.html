@@ -95,8 +95,10 @@ try {
 var myAbi = web3.eth.contract(abi);
 var myfunction = myAbi.at(contractaddress);
 //call the get function of our SimpleStorage contract
-//myfunction.methods.userGuesses( today-1,web3.eth.accounts[0]).call();
-myfunction.userGuesses.call( today-1,web3.eth.accounts[0],function (err, price) {
+var price = myfunction.methods.userGuesses( today-1,web3.eth.accounts[0]).call();
+document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday you guessed price is : " + price;
+ 
+/*myfunction.userGuesses.call( today-1,web3.eth.accounts[0],function (err, price) {
 if (err) { 
  console.log(err);
  document.getElementById("yesterday_user_guessed_price").innerHTML = err;
@@ -106,6 +108,7 @@ if (price) {
 document.getElementById("yesterday_user_guessed_price").innerHTML = "yesterday you guessed price is : " + price;
 }
 });
+*/
 }
 catch (err) {
 document.getElementById("yesterday_user_guessed_price").innerHTML = err;
